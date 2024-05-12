@@ -1,3 +1,10 @@
+/* navbar */
+.bg-navbar .navbar-expand-lg .navbar-light .bg-white {
+  --bs-bg-opacity: 1;
+  background-color: rgb(170 131 170); 
+}
+
+/* estilos home em header */
 .profile {
   position: relative;
   height: 75vw;
