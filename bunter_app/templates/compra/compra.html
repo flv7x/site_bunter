@@ -26,43 +26,83 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="{% static 'contato/stylecss/cont_estilo.css' %}"> -->
 </head>
-<body>
-<div class="container">
-    <h1 class="mt-5">Cadastro de Vendas</h1>
-    <form method="POST" action="{% url 'compra' %}" class="mt-4">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="cliente">Cliente:</label>
-            <select id="cliente" name="cliente" class="form-control" required>
-                <option value="" disabled selected>Selecione o cliente</option>
-                {% for cliente in clientes %}
-                    <option value="{{ cliente.id }}">{{ cliente.nome }} {{ cliente.sobrenome }}</option>
-                {% endfor %}
-            </select>
+
+<body class="d-flex flex-column">
+    <main class="flex-shrink-0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container px-5">
+                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'homes/img/bunter_logo.png' %}"
+                        width="65em" height="65em" class="d-inline-block align-top" alt="logo bunter_logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span
+                        class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'sobre_mim' %}">Sobre a loja</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'produto' %}">Produtos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'contato' %}">contato</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <h1 class="mt-5">Cadastro de Vendas</h1>
+            <form method="POST" action="{% url 'compra' %}" class="mt-4">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="cliente">Cliente:</label>
+                    <select id="cliente" name="cliente" class="form-control" required>
+                        <option value="" disabled selected>Selecione o cliente</option>
+                        {% for cliente in clientes %}
+                        <option value="{{ cliente.id }}">{{ cliente.nome }} {{ cliente.sobrenome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="produtos">Produtos:</label>
+                    <select id="produtos" name="produtos" class="form-control" multiple required>
+                        {% for produto in produtos %}
+                        <option value="{{ produto.id }}">{{ produto.descricao }} - {{ produto.marca.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" id="quantidade" name="quantidade" class="form-control" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="valor_total">Valor Total:</label>
+                    <input type="number" id="valor_total" name="valor_total" class="form-control" step="0.01" required>
+                    <br>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar Venda</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="produtos">Produtos:</label>
-            <select id="produtos" name="produtos" class="form-control" multiple required>
-                {% for produto in produtos %}
-                    <option value="{{ produto.id }}">{{ produto.descricao }} - {{ produto.marca.nome }}</option>
-                {% endfor %}
-            </select>
+    </main>
+    <footer class="bg-white py-4 mt-auto">
+        <div class="container px-5">
+            <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                <div class="col-auto">
+                    <div class="small m-0">Copyright &copy; Your Website 2023</div>
+                </div>
+                <div class="col-auto">
+                    <a class="small" href="#!">Privacy</a>
+                    <span class="mx-1">&middot;</span>
+                    <a class="small" href="#!">Terms</a>
+                    <span class="mx-1">&middot;</span>
+                    <a class="small" href="#!">Contact</a>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="quantidade">Quantidade:</label>
-            <input type="number" id="quantidade" name="quantidade" class="form-control" min="1" required>
-        </div>
-        <div class="form-group">
-            <label for="valor_total">Valor Total:</label>
-            <input type="number" id="valor_total" name="valor_total" class="form-control" step="0.01" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Cadastrar Venda</button>
-    </form>
-</div>
-<!-- Adicione os links para os arquivos JavaScript do Bootstrap e seu arquivo de scripts personalizados aqui -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="scripts.js"></script>
+    </footer>
+    <!-- Adicione os links para os arquivos JavaScript do Bootstrap e seu arquivo de scripts personalizados aqui -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
 </body>
+
 </html>

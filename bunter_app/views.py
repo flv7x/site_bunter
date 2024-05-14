@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Cliente
+from .forms import ClienteForm
 
 # Create your views here.
 def home(request):
@@ -15,20 +15,10 @@ def compra(request):
 
 def CadastroCliente(request):
     if request.method == 'POST':
-        # Extrair os dados do formulário POST
-        nome = request.POST.get('nome')
-        sobrenome = request.POST.get('sobrenome')
-        cpf = request.POST.get('cpf')
-        email = request.POST.get('email')
-        
-        # Criar uma instância do modelo Cliente com os dados do formulário
-        novo_cliente = Cliente(nome=nome, sobrenome=sobrenome, cpf=cpf, email=email)
-        
-        # Salvar o novo cliente no banco de dados
-        novo_cliente.save()
-        
-        # Redirecionar para uma página de sucesso após salvar os dados
-        return redirect('pagina_sucesso')  # Altere 'pagina_sucesso' para a URL da sua página de sucesso
-
-    # Se a solicitação não for do tipo POST, renderizar o formulário
-    return render(request, 'cadastro_cliente/cadastro_clientes.html')  # Altere 'seu_template.html' para o nome do seu template de formulário
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('compra')  # Redireciona para a página de sucesso após o salvamento
+    else:
+        form = ClienteForm()
+    return render(request, 'cadastro_cliente/cadastro_clientes.html')
