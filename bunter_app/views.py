@@ -1,5 +1,7 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from .forms import ClienteForm
+from .models import Produto
 
 # Create your views here.
 def home(request):
@@ -12,13 +14,17 @@ def sobre_mim(request):
     return render(request, 'sobre_mim/sobre_mim.html')
 def compra(request):
     return render(request, 'compra/compra.html')
+def listar_produtos(request):
+    produtos = Produto.objects.all()
+    return render(request, 'produtos/lista_de_produtos.html', {'produtos': produtos})
+    
 
 def CadastroCliente(request):
     if request.method == 'POST':
-        form = ClienteForm(request.POST)
+        form = ClienteForm(request.POST)  # Instancie o formulário correto
         if form.is_valid():
             form.save()
-            return redirect('compra')  # Redireciona para a página de sucesso após o salvamento
+            return redirect('produto')  # Redireciona para a página de sucesso após o cadastro
     else:
-        form = ClienteForm()
-    return render(request, 'cadastro_cliente/cadastro_clientes.html')
+        form = ClienteForm()  # Instancie o formulário correto
+    return render(request, 'cadastro_cliente/cliente.html', {'form': form})
