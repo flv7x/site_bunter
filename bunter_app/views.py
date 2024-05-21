@@ -1,5 +1,5 @@
-from django.http import JsonResponse
 from django.shortcuts import redirect, render
+from .forms import ContatoForm
 from .forms import ClienteForm
 from .models import Produto
 
@@ -7,7 +7,15 @@ from .models import Produto
 def home(request):
     return render(request, 'homes/home.html')
 def contato(request):
-    return render(request, 'contato/contatos.html')
+    if request.method == 'POST':
+        formContact = ContatoForm(request.POST)
+        if formContact.is_valid():
+            formContact.save()
+            return redirect('home')  
+    else:
+        formContact = ContatoForm()
+    return render(request, 'contato/contatos.html', {'form': formContact})
+        
 def produto(request):
     return render(request, 'produtos/produtos.html')
 def sobre_mim(request):

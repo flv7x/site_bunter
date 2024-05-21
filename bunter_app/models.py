@@ -1,13 +1,13 @@
 from django.db import models
 
 class Contact(models.Model):
-    name = models.CharField(max_length=100)
+    nome = models.CharField(max_length=100)
     email = models.EmailField()
-    subject = models.CharField(max_length=200)
-    message = models.TextField()
+    titulo = models.CharField(max_length=200)
+    mensagem = models.TextField()
     
     def __str__(self):
-        return self.name
+        return self.nome
 
 class Cliente(models.Model):  # Renomeado para seguir a convenção de nomenclatura
     nome = models.CharField(max_length=30, blank=False, null=False)
