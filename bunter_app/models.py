@@ -30,7 +30,7 @@ class Produto(models.Model):
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
     custo = models.DecimalField(max_digits=8, decimal_places=2)
     preco_venda = models.DecimalField(max_digits=8, decimal_places=2)
-    imagem = models.ImageField(blank=False, null=False)
+    imagem = models.ImageField(upload_to='imagens/', blank=False, null=False)
     
     def __str__(self):
         return self.descricao
