@@ -7,7 +7,7 @@ class Contact(models.Model):
     mensagem = models.TextField()
     
     def __str__(self):
-        return self.nome
+        return self.titulo
 
 class Cliente(models.Model):  # Renomeado para seguir a convenção de nomenclatura
     nome = models.CharField(max_length=30, blank=False, null=False)
@@ -16,7 +16,7 @@ class Cliente(models.Model):  # Renomeado para seguir a convenção de nomenclat
     email = models.EmailField(blank=False, null=False)
     
     def __str__(self):
-        return self.nome
+        return f"{self.nome} {self.sobrenome}"
 
 class Marca(models.Model):  # Renomeado para seguir a convenção de nomenclatura
     nome = models.CharField(max_length=30, blank=False, null=False)  # Renomeado para nome
@@ -30,7 +30,7 @@ class Produto(models.Model):
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
     custo = models.DecimalField(max_digits=8, decimal_places=2)
     preco_venda = models.DecimalField(max_digits=8, decimal_places=2)
-    imagem = models.ImageField(blank=True, null=True)
+    imagem = models.ImageField(blank=False, null=False)
     
     def __str__(self):
         return self.descricao

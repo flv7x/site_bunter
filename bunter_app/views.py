@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.http import JsonResponse
 from .forms import ContatoForm
 from .forms import ClienteForm
 from .models import Produto
@@ -22,10 +23,9 @@ def sobre_mim(request):
     return render(request, 'sobre_mim/sobre_mim.html')
 def compra(request):
     return render(request, 'compra/compra.html')
-def listar_produtos(request):
+def mostruario(request):
     produtos = Produto.objects.all()
-    return render(request, 'produtos/lista_de_produtos.html', {'produtos': produtos})
-    
+    return render(request, 'produtos/mostruario.html', {'produtos': produtos})
 
 def CadastroCliente(request):
     if request.method == 'POST':
