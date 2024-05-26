@@ -18,14 +18,12 @@ def contato(request):
     return render(request, 'contato/contatos.html', {'form': formContact})
         
 def produto(request):
-    return render(request, 'produtos/produtos.html')
+    produtos = Produto.objects.all()
+    return render(request, 'produtos/produtos.html', {'produtos': produtos})
 def sobre_mim(request):
     return render(request, 'sobre_mim/sobre_mim.html')
 def compra(request):
     return render(request, 'compra/compra.html')
-def mostruario(request):
-    produtos = Produto.objects.all()
-    return render(request, 'produtos/mostruario.html', {'produtos': produtos})
 
 def CadastroCliente(request):
     if request.method == 'POST':

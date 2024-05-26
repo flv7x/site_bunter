@@ -23,7 +23,7 @@
         rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="{% static 'contato/stylecss/cont_estilo.css' %}"> -->
     <!-- Css do projeto -->
-    <link rel="stylesheet" href="{% static 'produtos/stylecss/produto.css' %}">
+    <link rel="stylesheet" href="{% static 'produto/stylecss/produt.css' %}">
 </head>
 <body class="d-flex flex-column">
     <main class="flex-shrink-0">
@@ -44,44 +44,45 @@
         </nav>
 
         <section class="projects-section bg-light" id="projects">
-            <div class="container px-4 px-lg-5">
-                <!-- Featured Project Row-->
-                <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                    <div class="col-xl-8 col-lg-7"><a href="{% url 'mostruario' %}"><img class="img-fluid mb-3 mb-lg-0" src="{% static 'produto/img/img_sapato1.jpg' %}" alt="Imagem sapato_all star" /></a></div>
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="featured-text text-center text-lg-left">
-                            <h4>Entre na moda dos calçados</h4>
-                            <p class="text-black-50 mb-0">Lorem ipsum dolor sit</p>
+
+            <div class="container">
+                <h1>Mostruário de Produtos</h1>
+                <div class="row" id="produtos-container">
+                    <!-- Os cards de produtos serão adicionados aqui -->
+                    {% for produto in produtos %}
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem; margin-bottom: 2em;">
+                            <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.descricao }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ produto.descricao }}</h5>
+                                <p class="card-text">Código: {{ produto.codigo }}</p>
+                                <p class="card-text">Marca: {{ produto.marca }}</p>
+                                <p class="card-text">Custo: R$ {{ produto.custo }}</p>
+                                <p class="card-text">Preço de Venda: R$ {{ produto.preco_venda }}</p>
+                                <a href="#" class="btn btn-primary mais-informacoes" data-toggle="modal" data-target="#popup{{ produto.id }}">Mais informações</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Project One Row-->
-                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                    <div class="col-lg-6"><a href="#"><img class="img-fluid" src="{% static 'produto/img/img_sapato2.jpg' %}" alt="..." /></a></div>
-                    <div class="col-lg-6">
-                        <div class="bg-black text-center h-100 project">
-                            <div class="d-flex h-100">
-                                <div class="project-text w-100 my-auto text-center text-lg-left">
-                                    <h4 class="text-white">Calçados Masculinos</h4>
-                                    <p class="mb-0 text-white-50">Lorem ipsum dolor sit.</p>
+                    <!-- Modal -->
+                    <div class="modal fade" id="popup{{ produto.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Mais informações sobre {{ produto.descricao }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Aqui você pode adicionar mais informações sobre o produto -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Project Two Row-->
-                <div class="row gx-0 justify-content-center">
-                    <div class="col-lg-6"><a href="#"><img class="img-fluid" src="{% static 'produto/img/img_sapato3.jpg' %}" alt="..." /></a></div>
-                    <div class="col-lg-6 order-lg-first">
-                        <div class="bg-black text-center h-100 project">
-                            <div class="d-flex h-100">
-                                <div class="project-text w-100 my-auto text-center text-lg-right">
-                                    <h4 class="text-white">Calçados femeninos</h4>
-                                    <p class="mb-0 text-white-50">Lorem ipsum dolor sit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>
@@ -102,7 +103,9 @@
         </div>
     </footer>
 
+    <script src="{% static 'produto/js/pop-up.js' %}"></script>
       <!-- Inclua os arquivos JS do Bootstrap -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

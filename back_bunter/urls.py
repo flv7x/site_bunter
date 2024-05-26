@@ -11,6 +11,5 @@ urlpatterns = [
     path('produtos/', views.produto, name='produto'),
     path('sobre_mim/', views.sobre_mim, name='sobre_mim'),
     path('compra/', views.compra, name='compra'),
-    path('mostruario/', views.mostruario, name='mostruario'),
     path('cadastro_cliente/', views.CadastroCliente, name='cadastro_clientes'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
