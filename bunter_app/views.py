@@ -27,10 +27,10 @@ def compra(request):
 
 def CadastroCliente(request):
     if request.method == 'POST':
-        form = ClienteForm(request.POST)  # Instancie o formulário correto
+        form = ClienteForm(request.POST)  
         if form.is_valid():
             form.save()
-            return redirect('produto')  # Redireciona para a página de sucesso após o cadastro
+            return redirect('produto')
     else:
-        form = ClienteForm()  # Instancie o formulário correto
+        form = ClienteForm()
     return render(request, 'cadastro_cliente/cliente.html', {'form': form})

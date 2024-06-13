@@ -1,12 +1,8 @@
-// script.js
-
-// script.js
-
 document.addEventListener('DOMContentLoaded', function() {
     const produtoForm = document.getElementById('produtoForm');
 
     produtoForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede o envio padrão do formulário
+        event.preventDefault(); 
 
         const formData = new FormData(this);
 
@@ -16,10 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            // Limpa o formulário
             this.reset();
 
-            // Atualiza a lista de produtos na página
             const container = document.querySelector('.container');
             const card = `
                 <div class="card" style="width: 18rem;">

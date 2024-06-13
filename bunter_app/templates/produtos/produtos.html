@@ -52,7 +52,6 @@
             <div class="container">
                 <h1>Mostruário de Produtos</h1>
                 <div class="row" id="produtos-container">
-                    <!-- Os cards de produtos serão adicionados aqui -->
                     {% for produto in produtos %}
                     <div class="col-md-4">
                         <div class="card" style="width: 18rem; margin-bottom: 2em;">
@@ -63,26 +62,7 @@
                                 <p class="card-text">Marca: {{ produto.marca }}</p>
                                 <p class="card-text">Custo: R$ {{ produto.custo }}</p>
                                 <p class="card-text">Preço de Venda: R$ {{ produto.preco_venda }}</p>
-                                <a href="#" class="btn btn-primary mais-informacoes" data-toggle="modal" data-target="#popup{{ produto.id }}">Mais informações</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="popup{{ produto.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Mais informações sobre {{ produto.descricao }}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- Aqui você pode adicionar mais informações sobre o produto -->
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                </div>
+                                <a href="{% url 'cadastro_clientes' %}" class="btn btn-primary mais-informacoes">Mais informações</a>
                             </div>
                         </div>
                     </div>
